@@ -1,0 +1,214 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-paper font-sans text-ink antialiased;
+    font-feature-settings: "cv11", "ss01";
+  }
+  ::selection {
+    @apply bg-brand-200 text-brand-950;
+  }
+  /* One consistent keyboard focus ring for everything interactive. */
+  :focus-visible {
+    @apply outline-none ring-2 ring-brand-500/50 ring-offset-2 ring-offset-paper;
+  }
+}
+
+@layer components {
+  /* ---------- Buttons ---------- */
+  .btn {
+    @apply inline-flex select-none items-center justify-center gap-2 whitespace-nowrap rounded-lg px-4 py-2 text-sm font-medium transition duration-150 disabled:pointer-events-none disabled:opacity-50;
+  }
+  .btn-sm {
+    @apply gap-1.5 px-3 py-1.5 text-[13px];
+  }
+  .btn-lg {
+    @apply px-5 py-2.5 text-[15px];
+  }
+  .btn-primary {
+    @apply bg-brand-700 text-white shadow-card hover:bg-brand-800 active:bg-brand-900;
+  }
+  .btn-secondary {
+    @apply border border-line-strong bg-white text-ink shadow-card hover:border-ink-faint hover:bg-paper active:bg-paper-deep;
+  }
+  .btn-ghost {
+    @apply text-ink-soft hover:bg-ink/5 hover:text-ink active:bg-ink/10;
+  }
+  .btn-danger {
+    @apply bg-red-600 text-white shadow-card hover:bg-red-700 active:bg-red-800;
+  }
+  .icon-btn {
+    @apply inline-flex h-8 w-8 items-center justify-center rounded-md text-ink-soft transition duration-150 hover:bg-ink/5 hover:text-ink active:bg-ink/10 disabled:pointer-events-none disabled:opacity-40;
+  }
+
+  /* ---------- Form controls ---------- */
+  .label {
+    @apply mb-1.5 block text-[13px] font-medium text-ink-soft;
+  }
+  .input,
+  .select {
+    @apply w-full rounded-lg border border-line-strong bg-white px-3 py-2 text-sm text-ink shadow-card transition duration-150 placeholder:text-ink-faint hover:border-ink-faint focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/25 disabled:cursor-not-allowed disabled:bg-paper disabled:opacity-60;
+  }
+  .select {
+    @apply cursor-pointer appearance-none bg-no-repeat pr-8;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236d6e79' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-position: right 0.55rem center;
+  }
+  .input-error {
+    @apply border-red-400 focus:border-red-500 focus:ring-red-500/20;
+  }
+
+  /* ---------- Surfaces ---------- */
+  .card {
+    @apply rounded-xl border border-line bg-white shadow-card;
+  }
+  .badge {
+    @apply inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-medium leading-4;
+  }
+  .alert-error {
+    @apply flex items-start gap-2 rounded-lg border border-red-200 bg-red-50 px-3 py-2.5 text-[13px] text-red-800;
+  }
+  .alert-success {
+    @apply flex items-start gap-2 rounded-lg border border-brand-200 bg-brand-50 px-3 py-2.5 text-[13px] text-brand-800;
+  }
+
+  /* CSS-only tooltip: <span class="tip" data-tip="Bold  Ctrl+B"> */
+  .tip {
+    @apply relative inline-flex;
+  }
+  .tip::after {
+    content: attr(data-tip);
+    @apply pointer-events-none absolute left-1/2 top-full z-50 mt-2 whitespace-nowrap rounded-md bg-ink px-2 py-1 text-[11px] font-medium text-white opacity-0 shadow-lift transition duration-150;
+    transform: translate(-50%, 2px);
+  }
+  .tip:hover::after,
+  .tip:focus-within::after {
+    @apply opacity-100;
+    transform: translate(-50%, 0);
+    transition-delay: 350ms;
+  }
+}
+
+/* ---------- Document typography (ProseMirror) ---------- */
+.doc-content {
+  outline: none;
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: #26272d;
+}
+.doc-content:focus-visible {
+  box-shadow: none;
+}
+.doc-content > :first-child {
+  margin-top: 0;
+}
+.doc-content p {
+  margin: 0 0 0.9rem;
+}
+.doc-content h1,
+.doc-content h2,
+.doc-content h3 {
+  font-family: "Fraunces Variable", ui-serif, Georgia, serif;
+  color: #1b1c20;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+}
+.doc-content h1 {
+  font-size: 2.1rem;
+  font-weight: 650;
+  margin: 2rem 0 0.8rem;
+}
+.doc-content h2 {
+  font-size: 1.55rem;
+  font-weight: 620;
+  margin: 1.75rem 0 0.65rem;
+}
+.doc-content h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 1.5rem 0 0.5rem;
+}
+.doc-content ul,
+.doc-content ol {
+  margin: 0 0 0.9rem;
+  padding-left: 1.6rem;
+}
+.doc-content ul {
+  list-style: disc;
+}
+.doc-content ol {
+  list-style: decimal;
+}
+.doc-content li {
+  margin: 0.2rem 0;
+}
+.doc-content li > p {
+  margin: 0;
+}
+.doc-content li::marker {
+  color: #2f8176;
+}
+.doc-content a {
+  color: #236758;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.doc-content blockquote {
+  border-left: 3px solid #4c9e92;
+  margin: 0 0 0.9rem;
+  padding: 0.1rem 0 0.1rem 1rem;
+  color: #55565f;
+  font-style: italic;
+}
+.doc-content code {
+  background: #f1eee6;
+  padding: 0.12rem 0.35rem;
+  border-radius: 5px;
+  font-size: 0.9em;
+}
+.doc-content pre {
+  background: #1b1c20;
+  color: #f1f1f4;
+  border-radius: 10px;
+  padding: 0.9rem 1rem;
+  margin: 0 0 0.9rem;
+  overflow-x: auto;
+}
+.doc-content pre code {
+  background: none;
+  padding: 0;
+  color: inherit;
+}
+.doc-content hr {
+  border: 0;
+  border-top: 1px solid #e6e1d6;
+  margin: 1.5rem 0;
+}
+.doc-content p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  color: #a9aab4;
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+/* Subtle paper grain behind the editor */
+.workspace {
+  background-color: #ece8de;
+  background-image: radial-gradient(rgba(27, 28, 32, 0.045) 1px, transparent 1px);
+  background-size: 18px 18px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
